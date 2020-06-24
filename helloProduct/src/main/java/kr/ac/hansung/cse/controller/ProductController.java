@@ -25,6 +25,7 @@ public class ProductController {
 	@Autowired
 	ProductRepository repository;
 	
+	//상품 생성
 	@PostMapping("/products")
 	public ResponseEntity<Product> postProduct(@RequestBody Product product){
 		try {
@@ -35,6 +36,7 @@ public class ProductController {
 		}
 	}	
 	
+	//전체 상품 불러오기
 	@GetMapping("/products")
 	public ResponseEntity<List<Product>> getAllProducts(){
 		List<Product> products = new ArrayList<>();
@@ -49,7 +51,7 @@ public class ProductController {
 		}
 	}
 		
-	
+	//해당 id 상품 불러오기
 	@GetMapping("/products/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable("id") int id){
 		Optional<Product> productData = repository.findById(id);
@@ -59,6 +61,7 @@ public class ProductController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	//해당 카테고리 상품들 전부 불러오기
 	@GetMapping("/products/category/{category}")
 	public ResponseEntity<List<Product>> findByCategory(@PathVariable("category") String category){
 		List<Product> products = new ArrayList<>();
@@ -73,7 +76,7 @@ public class ProductController {
 		}
 	}
 	
-	
+	//해당 id 상품 수정
 	@PutMapping("/products/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable("id") int id,@RequestBody Product product){
 		
@@ -92,6 +95,7 @@ public class ProductController {
 		}
 	}
 	
+	//해당 id 상품 삭제
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") int id) {
 		try {
